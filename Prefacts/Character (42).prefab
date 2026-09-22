@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1124763312158000312}
   - component: {fileID: 8311147688118874820}
   - component: {fileID: 7699908632733560828}
+  - component: {fileID: -7693179748131273791}
   m_Layer: 0
   m_Name: Character (42)
   m_TagString: Untagged
@@ -130,6 +131,18 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-7693179748131273791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2793574140889953237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d38537cdbb623d48ab23759eb1f623b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Obtaclecontroller
 --- !u!1 &4870387345155352984
 GameObject:
   m_ObjectHideFlags: 0
