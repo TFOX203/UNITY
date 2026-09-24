@@ -10,7 +10,14 @@ public class Obtaclecontroller : MonoBehaviour
     void Start()
     {
         float size = Random.Range(minSize, maxSize);
-        transform.localScale = new Vector3(size, size, 1);
+        transform.localScale = 
+            new Vector3(size, size, 1);
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        Transform tf = GetComponent<Transform>();
+        rb.AddForce(Vector2.up * 34);
+        Debug.Log(transform == tf);
+
+
     }
 
     // Update is called once per frame
