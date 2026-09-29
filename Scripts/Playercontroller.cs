@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Playercontroller : MonoBehaviour
 {
@@ -11,6 +12,10 @@ public class Playercontroller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Mouse.current.leftButton.isPressed)
+        {
+            Debug.Log("The left button is clicked");
+            Debug.Log("The current mouse position is: " + Mouse.current.position.value);
+        }
     }
 }
