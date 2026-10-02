@@ -1141,6 +1141,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e159fa8917bc3d7418032c14ec6bc38c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Playercontroller
+  force: 2
+  rb: {fileID: 0}
 --- !u!1001 &182975943295714897
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1196,6 +1198,10 @@ PrefabInstance:
     - target: {fileID: 2793574140889953237, guid: 9e4f3bb86fe3e824f87e938f757c1f51, type: 3}
       propertyPath: m_Name
       value: Player1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8311147688118874820, guid: 9e4f3bb86fe3e824f87e938f757c1f51, type: 3}
+      propertyPath: m_GravityScale
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
