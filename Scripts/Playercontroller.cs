@@ -9,6 +9,8 @@ public class Playercontroller : MonoBehaviour
     public Rigidbody2D rb;
     [SerializeField]
     private float maxSpeed = 4;
+
+    private float elapsedTime = 0f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
