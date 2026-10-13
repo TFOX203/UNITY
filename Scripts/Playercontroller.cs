@@ -1,5 +1,7 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class Playercontroller : MonoBehaviour
 {
@@ -11,14 +13,23 @@ public class Playercontroller : MonoBehaviour
     private float maxSpeed = 4;
 
     private float elapsedTime = 0f;
+    [SerializeField]
+
+    private UIDocument uiDoc;
+
+    private Label scoreLabel;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        scoreLabel = uiDoc.rootVisualElement.Q<Label>(); 
     }
 
-    // Update is called once per frame
-    void Update()
+    void UpdateScore()
+    {
+        elapsedTime += Time.deltaTime;
+        scoreLabel.text = "Score: " + Mathf.FloorToInt(elapsedTime);
+    }
+    void UpdateMovement()
     {
         if (Mouse.current.leftButton.isPressed)
         {
@@ -30,11 +41,19 @@ public class Playercontroller : MonoBehaviour
             Debug.Log("The direction to the mouse is: " + dir.magnitude);
             transform.up = dir;
             rb.AddForce(dir * force);
-            if (rb.linearVelocity.magnitude > maxSpeed);
+            if (rb.linearVelocity.magnitude > maxSpeed) ;
             {
                 rb.linearVelocity = rb.linearVelocity.normalized * maxSpeed;
             }
         }
+    }
+   
+    //update is called once per frame
+    void Update()
+    {
+        UpdateScore();
+        UpdateMovement();
+       
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
