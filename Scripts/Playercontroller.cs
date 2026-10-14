@@ -41,7 +41,7 @@ public class Playercontroller : MonoBehaviour
             Debug.Log("The direction to the mouse is: " + dir.magnitude);
             transform.up = dir;
             rb.AddForce(dir * force);
-            if (rb.linearVelocity.magnitude > maxSpeed) ;
+            if (rb.linearVelocity.magnitude > maxSpeed);
             {
                 rb.linearVelocity = rb.linearVelocity.normalized * maxSpeed;
             }

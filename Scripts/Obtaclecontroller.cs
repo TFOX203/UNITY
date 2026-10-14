@@ -3,9 +3,9 @@ using UnityEngine;
 public class Obtaclecontroller : MonoBehaviour
 {
     [SerializeField]
-    private float minSize = 0.1f;
+    private float minSize = 2.5f;
     [SerializeField]
-    private float maxSize = 0.5f;
+    private float maxSize = 3f;
     [SerializeField]
     private float minForce = 20f;
     [SerializeField]
