@@ -19,6 +19,8 @@ public class Playercontroller : MonoBehaviour
 
     private Label scoreLabel;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField]
+    private ParticleSystem explosionEffect;
     void Start()
     {
         scoreLabel = uiDoc.rootVisualElement.Q<Label>(); 
@@ -58,6 +60,8 @@ public class Playercontroller : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        //transform.position;
         Destroy(gameObject);
+
     }
 }
