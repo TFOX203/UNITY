@@ -14,27 +14,39 @@ public class Obtaclecontroller : MonoBehaviour
     private float minTorque = 20f;
     [SerializeField]
     private float maxTorque = 48f;
+
+    [SerializeField]
+    private ParticleSystem impactEffect;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //Asing a random size to each obstacle object
+        // Assign a random size to each obstacle object
         float size = Random.Range(minSize, maxSize);
         transform.localScale = new Vector3(size, size, 1);
-        // Get the rigibody compenent on uor game object
+
+        // Get the rigidbody component on our game object
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        Transform tf = GetComponent<Transform>();
+
         Vector2 randomDirection = Random.insideUnitCircle;
+
         // Generate a random force
         float force = Random.Range(minForce, maxForce);
         rb.AddForce(randomDirection * force);
-        // Apply a random torque for each obtacle
+
+        // Apply a random torque for each obstacle
         float torque = Random.Range(minTorque, maxTorque);
         rb.AddTorque(-torque);
 
-        Debug.Log(transform == tf);
         rb.mass = size * 2;
-
     }
 
-    
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (impactEffect == null || collision.contactCount == 0) return;
+
+        // Punto exacto del choque
+        Vector2 hitPoint = collision.contacts[0].point;
+        Instantiate(impactEffect, hitPoint, Quaternion.identity);
+    }
 }

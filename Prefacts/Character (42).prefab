@@ -143,6 +143,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d38537cdbb623d48ab23759eb1f623b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Obtaclecontroller
+  minSize: 2.5
+  maxSize: 3
+  minForce: 20
+  maxForce: 48
+  minTorque: 20
+  maxTorque: 48
+  impactEffect: {fileID: 1020177472541653318, guid: 8f7dd04c36d369b4caf126760379a368, type: 3}
 --- !u!1 &4870387345155352984
 GameObject:
   m_ObjectHideFlags: 0
