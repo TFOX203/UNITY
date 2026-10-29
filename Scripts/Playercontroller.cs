@@ -21,11 +21,17 @@ public class Playercontroller : MonoBehaviour
 
     [SerializeField]
     private ParticleSystem explosionEffect;
+    [SerializeField]
 
-    void Start()
+    private AudioSource audioSource;
+
+    private void Start()
     {
+        
         scoreLabel = uiDoc.rootVisualElement.Q<Label>();
     }
+
+   
 
     void UpdateScore()
     {
@@ -59,6 +65,7 @@ public class Playercontroller : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        audioSource.Play();
         // Punto exacto del choque (si no hay contactos, usa la posición del jugador)
         Vector2 hitPoint = collision.contactCount > 0
             ? collision.contacts[0].point
