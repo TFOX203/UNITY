@@ -2,36 +2,31 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
-public class Playercontroller : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [SerializeField]
-    private float force = 5;
-
+    private float force = 2;
     public Rigidbody2D rb;
-
     [SerializeField]
     private float maxSpeed = 4;
 
     private float elapsedTime = 0f;
-
     [SerializeField]
     private UIDocument uiDoc;
 
     private Label scoreLabel;
-
     [SerializeField]
     private ParticleSystem explosionEffect;
     [SerializeField]
+    private AudioSource audioSource;   // Sonido de la explosión
+    [SerializeField]
+    [Range(0f, 1f)]
+    private float explosionVolume = 1f;
 
-    private AudioSource audioSource;
-
-    private void Start()
+    void Start()
     {
-        
         scoreLabel = uiDoc.rootVisualElement.Q<Label>();
     }
-
-   
 
     void UpdateScore()
     {
@@ -43,12 +38,11 @@ public class Playercontroller : MonoBehaviour
     {
         if (Mouse.current.leftButton.isPressed)
         {
-            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.value);
-            Vector2 dir = (mousePos - (Vector2)transform.position).normalized;
-
+            // Calculate the direction from the player to the mouse
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.value);
+            Vector2 dir = (mousePos - transform.position).normalized;
             transform.up = dir;
             rb.AddForce(dir * force);
-
             if (rb.linearVelocity.magnitude > maxSpeed)
             {
                 rb.linearVelocity = rb.linearVelocity.normalized * maxSpeed;
@@ -56,7 +50,6 @@ public class Playercontroller : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         UpdateScore();
@@ -65,13 +58,28 @@ public class Playercontroller : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        audioSource.Play();
-        // Punto exacto del choque (si no hay contactos, usa la posición del jugador)
-        Vector2 hitPoint = collision.contactCount > 0
-            ? collision.contacts[0].point
-            : (Vector2)transform.position;
+        // Solo explota si choca con un obstáculo
+        if (collision.gameObject.GetComponent<ObstacleController>() == null)
+        {
+            return;
+        }
 
-        Instantiate(explosionEffect, hitPoint, Quaternion.identity);
-        Destroy(gameObject);
+        // Punto exacto del choque (z = 0 para que se vea en 2D)
+        Vector3 hitPoint = collision.GetContact(0).point;
+        hitPoint.z = 0f;
+
+        // 1) Partículas justo en el punto de la explosión
+        ParticleSystem fx = Instantiate(explosionEffect, hitPoint, Quaternion.identity);
+        fx.Play();
+        Destroy(fx.gameObject, fx.main.duration + fx.main.startLifetime.constantMax);
+
+        // 2) Sonido de la explosión (suena aunque el jugador se destruya)
+        if (audioSource != null)
+        {
+            audioSource.Play();
+        }
+
+        // 3) El jugador desaparece
+        Destroy(gameObject, 0.2f);
     }
 }
