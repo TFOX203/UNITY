@@ -15,6 +15,10 @@ public class PlayerController : MonoBehaviour
     private UIDocument uiDoc;
 
     private Label scoreLabel;
+
+    private Button restartButton;
+
+
     [SerializeField]
     private ParticleSystem explosionEffect;
     [SerializeField]
@@ -26,6 +30,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         scoreLabel = uiDoc.rootVisualElement.Q<Label>();
+        restartButton = uiDoc.rootVisualElement.Q<Button>("RestartButton");
     }
 
     void UpdateScore()
