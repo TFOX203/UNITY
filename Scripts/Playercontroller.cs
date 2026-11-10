@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -31,6 +32,13 @@ public class PlayerController : MonoBehaviour
     {
         scoreLabel = uiDoc.rootVisualElement.Q<Label>();
         restartButton = uiDoc.rootVisualElement.Q<Button>("RestartButton");
+        restartButton.clicked += LoadScene();
+    }
+
+    private Action LoadScene()
+    {
+        Debug.Log("clicked");
+        return null;
     }
 
     void UpdateScore()
