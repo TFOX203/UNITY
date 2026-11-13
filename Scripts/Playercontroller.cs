@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
@@ -32,13 +33,16 @@ public class PlayerController : MonoBehaviour
     {
         scoreLabel = uiDoc.rootVisualElement.Q<Label>();
         restartButton = uiDoc.rootVisualElement.Q<Button>("RestartButton");
-        restartButton.clicked += LoadScene();
+        restartButton.clicked += LoadScene;
+
+        restartButton.style.display = DisplayStyle.None;
     }
 
-    private Action LoadScene()
+    private void LoadScene()
     {
         Debug.Log("clicked");
-        return null;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        
     }
 
     void UpdateScore()
@@ -71,6 +75,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        restartButton.style.display = DisplayStyle.Flex;
         // Solo explota si choca con un obstáculo
         if (collision.gameObject.GetComponent<ObstacleController>() == null)
         {
